@@ -1,4 +1,4 @@
-public class Iteration{
+public class State{
     private String name;
     private double workCount;
     private Map<Iteration, Double> pointers;
