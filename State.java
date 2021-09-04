@@ -1,12 +1,13 @@
+import java.util.HashMap;
 import java.util.Map;
 
 public class State{
     private String name;
-    private double receivedPoints;
-    private double workPoints;
-    private Map<State, Double> output;
+    private float receivedPoints;
+    private float workPoints;
+    private Map<State, Float> output = new HashMap<>();
 
-    public State(String name, double workPoints){
+    public State(String name, float workPoints){
         this.name = name;
         this.workPoints = workPoints;
     }
@@ -15,11 +16,15 @@ public class State{
         return name;
     }
 
-    public double getWorkPoints(){
+    public float getWorkPoints(){
         return workPoints;
     }
 
-    public void receievePoints(double receivedWorkPoints){
+    public void setWorkPoints(float workPoints){
+        this.workPoints = workPoints;
+    }
+
+    public void receievePoints(float receivedWorkPoints){
         receivedPoints += receivedWorkPoints;
     }
     
@@ -27,13 +32,13 @@ public class State{
         return output;
     }
 
-    public void setOutput(Map output){
-        this.output = output;
+    public void setOutput(State input, float ratio){
+        this.output.put(input, ratio);
     }
 
     public void sendWork(){
         for (State s : output.keySet()) {
-            System.out.println("Workpoitns: " + workPoints);
+            System.out.println("Workpoints: " + workPoints);
             System.out.println("output: " + output.get(s));
 
             s.receievePoints(workPoints * output.get(s));
